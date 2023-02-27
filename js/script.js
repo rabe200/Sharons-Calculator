@@ -1,3 +1,4 @@
+console.clear();
 const output = document.querySelector('[data-js="output"]'); 
 const calc1 = document.querySelector('[data-js="calc1"]');
 
@@ -17,14 +18,17 @@ const renderCalcCalculationsItem = document.createElement("li");
 renderCalcOutputContent.setAttribute("data-js", "output");
 renderCalcOutputContent.textContent = "IMAGINE NUMBERS";
 renderCalcOutputContent
-console.log(renderCalcOutputContent);
+// console.log(renderCalcOutputContent);
 renderCalcGrid.classList.add("awesomeGrid");
 renderCalcGrid.setAttribute("data-js", "awesomeGrid");
 renderCalcButton.classList.add("numbers");
 renderCalcInput.classList.add("input");
+renderCalcInputForm.setAttribute("data-js", "form2reset")
 renderCalcInputField.setAttribute("data-js", "input__form")
+// renderCalcInputField.value="HERE";
+
 renderCalcLabel.textContent="INPUT";
-renderCalcButton.textContent="1";
+// renderCalcButton.textContent="1";
 renderCalcInputSubmit.setAttribute("type", "submit");
 renderCalcInputSubmit.classList.add("submitButton");
 renderCalcInputSubmit.textContent="CALCULATE";
@@ -33,13 +37,14 @@ renderCalcInputSubmit.addEventListener("click", (event)=> {
     const input2 = document.querySelector('[data-js="input__form"]');
     
     rechenInhalt = input2;
-    console.log("rechenInhalt: " + rechenInhalt.value);
+    // console.log("rechenInhalt: " + rechenInhalt.value);
     const output = document.querySelector('[data-js="output"]');
     output.textContent = rechenInhalt.value;
-    check();
+    // check();
     addCalculation();
 });
 renderCalcCalculations.classList.add("calculations");
+renderCalcCalculations.setAttribute("data-js", "history");
 
 
 // rechenInhalt ist der String, den es nun auf Signs zu untersuchen gilt
@@ -49,28 +54,41 @@ renderCalcCalculations.classList.add("calculations");
 // verwertet
 //jedes Rechenzeichen wird einer Math Funktion zugewiesen
 
-const check = () => {
-    const x = rechenInhalt.value;
-    console.log(x + typeof x);
-    const split = x.split(" ");
-    console.log("splitted: " + split + typeof split);
-    let i;
-    console.log("_______");
-    for (i=1; i<split.length; i++)
-    {
-        console.log(i + "=" + split[i]);
-    };
+// const check = () => {
+//     const x = rechenInhalt.value;
+//     console.log(x + typeof x);
+//     const split = x.split(" ");
+//     console.log("splitted: " + split + typeof split);
+//     let i;
+//     console.log("_______");
+//     for (i=1; i<split.length; i++)
+//     {
+//         console.log(i + "=" + split[i]);
+//     };
 
 
     // if (x.includes("+")) console.log ("detected: +");
-}
+// }
 
 const addCalculation = () => {
+
     const input2 = document.querySelector('[data-js="input__form"]');
+    const history = document.querySelector('[data-js="history"]');
+    const form = document.querySelector('[data-js="form2reset"]')
+    if (history.innerHTML.includes("li")) {
+        x= document.createElement("li");
+        x.textContent=input2.value;
+        renderCalcCalculations.append(x);
+        form.reset();
+        x=null;
+        return;
+    } else {
+    
     x= renderCalcCalculationsItem;
     x.textContent = input2.value;
     renderCalcCalculations.append(x);
-    // input2.textContent.reset();
+}
+        
     //if li contains textContent create new li element and append to render calcCalculations
 
 }
@@ -84,10 +102,10 @@ renderCalcInput.append(renderCalcInputForm);
 renderCalcInputForm.append(renderCalcLabel);
 renderCalcLabel.append(renderCalcInputField);
 renderCalcInputForm.append(renderCalcInputSubmit);
-renderCalcInput.append(renderCalcCalculations);
+calc1.append(renderCalcCalculations);
 
 const grid = document.querySelectorAll(".numbers");
-console.log("grid: " + grid);
+// console.log("grid: " + grid);
 
 const gridNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 const gridSigns = ["=", "+", "-", "*", "/", "AC", "%", "(", ")"]
@@ -104,9 +122,9 @@ for (i=0; i<gridNumbers.length; i++) {
         const input = document.querySelector('[data-js="input__form"]');
         const vorhanden = input.value;
 
-        console.log(newGridTile.textContent);
+        // console.log(newGridTile.textContent);
         const x = parseInt(newGridTile.textContent, 10);
-        console.log(x, typeof x);
+        // console.log(x, typeof x);
         input.value=vorhanden + " " + x;
     })
 
@@ -119,13 +137,27 @@ for (i=0; i<gridNumbers.length; i++) {
         newGridTile.textContent=`${gridSigns[i]}`;
         newGridTile.addEventListener("click", () =>
         {
+            if (newGridTile.textContent==="AC") {
+            const AC = () => {
+                        // inputField = document.querySelector('[data-js="input__form"]');
+                        // history = document.querySelector('[data-js="history"]');
+                        form = document.querySelector('[data-js="form2reset"]');
+                        // console.log(history.innerHTML);
+                        form.reset();
+                             }
+            
+            newGridTile.addEventListener("click", () => {
+                AC();
+            })
+            } else {
             const input = document.querySelector('[data-js="input__form"]');
             const vorhanden = input.value;
-            console.log("vorhanden: " + vorhanden);
-            console.log("hinzuzufügen: " + newGridTile.textContent);
-            console.log("<---------->");
+            // console.log("vorhanden: " + vorhanden);
+            // console.log("hinzuzufügen: " + newGridTile.textContent);
+            // console.log("<---------->");
             const x = newGridTile.textContent;
             input.value=vorhanden + " " + x;
+            }
         })
     
         
@@ -135,3 +167,12 @@ for (i=0; i<gridNumbers.length; i++) {
 const mathAdd = (a, b) => {
     return output = a + b;
 }
+
+// const AC = () => {
+//     // inputField = document.querySelector('[data-js="input__form"]');
+//     // history = document.querySelector('(data-js="history"]');
+//     form = document.querySelector('(data-js="form2reset"]');
+
+//     form.reset();
+// }
+
