@@ -149,13 +149,17 @@ const arrayThatInput = () => {
                             let num2;
                             partNachPluszeichen = inputObject.indexOf(sign);
                             num2 = inputObject.slice(partNachPluszeichen);
+                            console.log(num2 , "num2")
                             num3 = num2.shift();
-                            console.log("num: ", num)
+                            num2 = num2.join("");
+                            console.log ("numJoined: ", num2)
+                            console.log("num: ", num);
                             console.log("num2: ", num2);
-                            console.log("numx: ", numx)
-                            console.log("num3: ", num3)
+                            console.log("numx: ", numx);
+                            console.log("num3: ", num3);
                             sum = parseInt(num, 10) + parseInt(num2, 10) ;
                             console.log(sum);
+                            return sum;
                         };
                         // calcSnippet = num + sign;
                         // sliceThis = calcSnippet.length;
@@ -207,6 +211,7 @@ const addCalculation = () => {
     arrayThatInput();
     iterateArr();
     addCalculation();
+    output.textContent = sum;
     // console.log("Teil der Rechnung: ", calcSnippet);
     // console.log("calculationInput: ", calculateThis, typeof calculateThis)
 });
