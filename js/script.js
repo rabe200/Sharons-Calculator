@@ -7,6 +7,7 @@ const gridField = document.querySelector('[data-js="awesomeGrid"]')
 const gridNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 const gridSigns = ["=", "+", "-", "*", "/", "AC", "%", "(", ")"]
 let i;
+inputObject = [];
 //render html variabls
 const renderCalc = document.createElement("section");
 const renderCalcOutput = document.createElement("h1");
@@ -125,8 +126,54 @@ const arrayThatInput = () => {
     for (i=1; i<xa.length; i++)
     console.log(i);
     console.log(typeof xax, xax);
+    return inputObject = xax;
 
                         }
+                        
+
+                        const iterateArr =() => {
+                            console.clear();
+                            let num = 0;
+                            let sign = "w";
+                            inputObject.forEach(element => {
+                                
+                        if (!isNaN(element)) {
+                            num += element;
+                            numx = num.slice(1);
+                            
+                        }
+                        if (isNaN(element)) {
+                        sign = element;
+                        
+                        if (sign === "+") {
+                            let num2;
+                            partNachPluszeichen = inputObject.indexOf(sign);
+                            num2 = inputObject.slice(partNachPluszeichen);
+                            console.log(num2 , "num2")
+                            num3 = num2.shift();
+                            num2 = num2.join("");
+                            console.log ("numJoined: ", num2)
+                            console.log("num: ", num);
+                            console.log("num2: ", num2);
+                            console.log("numx: ", numx);
+                            console.log("num3: ", num3);
+                            sum = parseInt(num, 10) + parseInt(num2, 10) ;
+                            console.log(sum);
+                            return sum;
+                        };
+                        // calcSnippet = num + sign;
+                        // sliceThis = calcSnippet.length;
+                        // sliceThis--;
+                        // console.log("sliceTHis: ", sliceThis);
+                        // sliced = inputObject.slice(sliceThis);
+                        // console.log(sliced);
+                        // return calculateThis = calcSnippet + sliced;
+                        }
+                                // if (!isNaN(element)) console.log("number", element)
+                                // else if (isNaN(element))console.log("sign", element)
+                            });
+                         }
+                    
                         
 const addCalculation = () => {
 
@@ -162,5 +209,9 @@ const addCalculation = () => {
     const output = document.querySelector('[data-js="output"]');
     output.textContent = rechenInhalt.value;
     arrayThatInput();
+    iterateArr();
     addCalculation();
+    output.textContent = sum;
+    // console.log("Teil der Rechnung: ", calcSnippet);
+    // console.log("calculationInput: ", calculateThis, typeof calculateThis)
 });
