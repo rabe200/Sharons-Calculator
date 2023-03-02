@@ -76,11 +76,14 @@ button {
 .historyButton {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     background-color: transparent;
     max-height: 160px;
     font-size: 0.8rem;
     overflow:hidden;
+    margin: 0px;
+    word-wrap: break-word;
+    background-color: aqua;
   
 }
 
@@ -93,9 +96,11 @@ button {
 
 .historyListLi {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-end;
     list-style: none;
     color: red;
+    width: 100%;
+    font-size: 0.8em;
     
 }

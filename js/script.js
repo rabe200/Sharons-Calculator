@@ -19,8 +19,6 @@ const renderCalcInputForm = document.createElement("form");
 const renderCalcLabel = document.createElement("label");
 const renderCalcInputField = document.createElement("input");
 const renderCalcInputSubmit = document.createElement("button");
-// const renderCalcCalculations = document.createElement("ul");
-// const renderCalcCalculationsItem = document.createElement("li");
 const historyList = document.createElement("div");
 const historyListUl = document.createElement("ul");
 const historyListLi = document.createElement("li");
@@ -120,59 +118,62 @@ for (i=0; i<gridNumbers.length; i++) {
 
 const arrayThatInput = () => {
     const input = document.querySelector('[data-js="input__form"]');
-    const a = input.value;
-    const xa = a.split(' ').join('').split('');
-    let xax = Array.from(xa);
-    for (i=1; i<xa.length; i++)
-    console.log(i);
-    console.log(typeof xax, xax);
-    return inputObject = xax;
+    
+    const inputString = input.value;
+    console.log(typeof inputString, inputString);
 
-                        }
-                        
+    const inputArray=Array.from(inputString);
+    console.log(typeof inputArray, inputArray);
+    const operators = ['+', '-', '*', '/'];
 
-                        const iterateArr =() => {
-                            console.clear();
-                            let num = 0;
-                            let sign = "w";
-                            inputObject.forEach(element => {
-                                
-                        if (!isNaN(element)) {
-                            num += element;
-                            numx = num.slice(1);
-                            
-                        }
-                        if (isNaN(element)) {
-                        sign = element;
+
+const operatorIndexes = operators.map((operator) => inputArray.indexOf(operator));
+
+if (operatorIndexes[0] >= 0) {
+    console.log("plus: ", (operatorIndexes[0]))
+    sign = operatorIndexes[0]
+    sliceValuesInTwo ()
+    sum = parseInt(firstValue, 10) + parseInt(secondValue, 10)
+    console.log("sum", sum)
+}else if (operatorIndexes[1] >0) {
+    console.log("minus ", (operatorIndexes[1]))
+    sign = operatorIndexes[1]
+    sliceValuesInTwo ()
+    sum = parseInt(firstValue, 10) - parseInt(secondValue, 10)
+    console.log(sum)
+}else if (operatorIndexes[2] >0) {
+    console.log("multiplicator ", (operatorIndexes[2]))
+    sign = operatorIndexes[2]
+    sliceValuesInTwo ()
+    sum = parseInt(firstValue, 10) * parseInt(secondValue, 10)
+    console.log(sum)
+}else if (operatorIndexes[3] >0) {
+    console.log("divisor ", (operatorIndexes[3]))
+    sign = operatorIndexes[3]
+    sliceValuesInTwo ()
+    sum = parseInt(firstValue, 10) / parseInt(secondValue, 10)
+    console.log(sum)}
+
+
+    console.log("signAbfrage: ",operatorIndexes);
+function sliceValuesInTwo () {
+    const sliceArr = inputArray.slice(0,sign) ;
+    console.log("sliced", sliceArr);
+    const sliceArr2 = inputArray.slice(sign+1, inputArray.length
+        )
+    firstValue = sliceArr.reduce((acc, currValue) => {
+        return acc + currValue;
+    })
+   
+    secondValue = sliceArr2.reduce((acc, currValue) => {
+        return acc + currValue;
+    })
+}
+    // console.log("value1,", firstValue);
+
+    // console.log("value2,", secondValue);
+}
                         
-                        if (sign === "+") {
-                            let num2;
-                            partNachPluszeichen = inputObject.indexOf(sign);
-                            num2 = inputObject.slice(partNachPluszeichen);
-                            console.log(num2 , "num2")
-                            num3 = num2.shift();
-                            num2 = num2.join("");
-                            console.log ("numJoined: ", num2)
-                            console.log("num: ", num);
-                            console.log("num2: ", num2);
-                            console.log("numx: ", numx);
-                            console.log("num3: ", num3);
-                            sum = parseInt(num, 10) + parseInt(num2, 10) ;
-                            console.log(sum);
-                            return sum;
-                        };
-                        // calcSnippet = num + sign;
-                        // sliceThis = calcSnippet.length;
-                        // sliceThis--;
-                        // console.log("sliceTHis: ", sliceThis);
-                        // sliced = inputObject.slice(sliceThis);
-                        // console.log(sliced);
-                        // return calculateThis = calcSnippet + sliced;
-                        }
-                                // if (!isNaN(element)) console.log("number", element)
-                                // else if (isNaN(element))console.log("sign", element)
-                            });
-                         }
                     
                         
 const addCalculation = () => {
@@ -184,7 +185,7 @@ const addCalculation = () => {
                                {
                                    x= document.createElement("li");
                                    x.classList.add("historyListLi");
-                                   x.textContent=input2.value;
+                                   x.textContent= sum; 
                                    historyList.append(x);
                                    form.reset();
                                    x=null;
@@ -192,8 +193,8 @@ const addCalculation = () => {
                                } else {
 
                                x= historyListLi;
-                               x.textContent = input2.value;
-                               historyListUl.append(x);
+                               x.textContent =  sum;
+                               historyList.append(x);
                                form.reset();
                                 }
 
@@ -207,11 +208,8 @@ const addCalculation = () => {
     
     rechenInhalt = input2;
     const output = document.querySelector('[data-js="output"]');
-    output.textContent = rechenInhalt.value;
+    
     arrayThatInput();
-    iterateArr();
     addCalculation();
     output.textContent = sum;
-    // console.log("Teil der Rechnung: ", calcSnippet);
-    // console.log("calculationInput: ", calculateThis, typeof calculateThis)
 });
